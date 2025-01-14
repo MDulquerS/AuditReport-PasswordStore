@@ -1,10 +1,22 @@
-# PasswordStore Smart Contract Audit
+Version: 0.1
+Date: January 14, 2025
+Auditor: Md Sumon
 
-This repository contains the audit process and findings for the `PasswordStore` smart contract. The audit will focus on:
+This audit report provides a thorough analysis of the PasswordStore smart contract, focusing on its security and functionality. The audit identified vulnerabilities, assessed their potential impact, and offered recommendations for mitigation.
 
-- Identifying potential vulnerabilities in the contract's design and implementation.
-- Evaluating compliance with Solidity best practices.
-- Assessing gas efficiency and suggesting optimizations.
-- Ensuring the contract securely handles ownership and password management.
+Key Findings
+High-Risk Issues:
 
-Stay tuned for detailed findings and recommendations as the audit progresses.
+[H-1] Passwords stored on-chain are visible to anyone.
+Data stored on-chain is publicly accessible, allowing passwords to be extracted using off-chain tools.
+[H-2] The setPassword function is callable by anyone.
+Lack of access controls enables unauthorized users to modify the password.
+Low-Risk Issue:
+
+[I-1] Incorrect NatSpec Documentation:
+A parameter listed in the getPassword function documentation does not exist.
+Recommendations
+Encrypt passwords off-chain before storing them on-chain to ensure privacy.
+Implement access controls to restrict setPassword function usage to the contract owner.
+Initialize the password in the contract constructor to mitigate security gaps.
+Update NatSpec documentation to reflect the actual function parameters.
